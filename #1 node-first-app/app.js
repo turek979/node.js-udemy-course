@@ -6,8 +6,14 @@ const http =  require('http');
 // './' is the current directory or relative path, not using a slash will look for core packages
 
 function rqListener(request, response){
-    console.log(request.url, request.method, request.headers);
+    // console.log(request.url, request.method, request.headers);
     // process.exit(); <- it unregisters from the event loop, basically shutting the server down
+    response.setHeader('Content-Type', 'text/html');
+    response.write('<html>');
+    response.write('<head><title>My First Page</title></head>');
+    response.write('<body>Hello from my Node.js Server!</body>');
+    response.write('</html>');
+    response.end(); // Ends a response and sends it.
 }
 
 const server = http.createServer(rqListener);
