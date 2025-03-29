@@ -37,6 +37,8 @@ Object oriented meands data can be organized in logical objects.
 
 Primitive vs Reference types!!!
 
+In JavaScript, primitive types (such as `string`, `number`, `boolean`, `null`, `undefined`, `Symbol`, and `BigInt`) are stored directly in memory and are immutable, meaning their values cannot be changed once assigned. When assigned to a new variable, a copy of the value is made. In contrast, reference types (such as `Object`, `Array`, and `Function`) are stored by reference, meaning the variable holds a reference to the memory location where the object is stored. Modifying a reference type affects all variables pointing to the same object. Primitive types are compared by value, while reference types are compared by their memory reference, making their behavior fundamentally different when copying or modifying data.
+
 # Node.js Basics
 
 
