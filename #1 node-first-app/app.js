@@ -22,15 +22,16 @@ function rqListener(request, response){
             // console.log(chunk);
             body.push(chunk);
         });
-        request.on('end', () => {
+        return request.on('end', () => {
             const parsedBody = Buffer.concat(body).toString();
             // console.log(parsedBody);
             const message = parsedBody.split('=')[1];
-            fs.writeFileSync('message.txt', message);
+            fs.writeFile('message.txt', message, error => {
+                response.statusCode = 302;  // Status code for redirection
+                response.setHeader('Location', '/');
+                return response.end();
+            });
         });
-        response.statusCode = 302;  // Status code for redirection
-        response.setHeader('Location', '/');
-        return response.end();
     }
     else {
     // console.log(request.url, request.method, request.headers);
