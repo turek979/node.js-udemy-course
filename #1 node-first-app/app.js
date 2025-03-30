@@ -9,7 +9,6 @@ const fs = require('fs');
 function rqListener(request, response){
     const url = request.url;
     const method = request.method;
-    const message = request.body;
     if(url ==='/'){
         response.write('<html>');
         response.write('<head><title>Enter Message</title></head>');
@@ -18,8 +17,18 @@ function rqListener(request, response){
         return response.end();
     } 
     if(url === '/message' && method === 'POST'){
-        fs.writeFileSync('message.txt', 'dummy data');
-        response.statusCode = 302;
+        const body = [];
+        request.on('data', (chunk) => {
+            // console.log(chunk);
+            body.push(chunk);
+        });
+        request.on('end', () => {
+            const parsedBody = Buffer.concat(body).toString();
+            // console.log(parsedBody);
+            const message = parsedBody.split('=')[1];
+            fs.writeFileSync('message.txt', message);
+        });
+        response.statusCode = 302;  // Status code for redirection
         response.setHeader('Location', '/');
         return response.end();
     }
