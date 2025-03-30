@@ -1,19 +1,38 @@
 // call it "server.js" or "app.js"
 
 const http =  require('http');
+const fs = require('fs');
 
 // When looking for a path '/' it will look for the file in the root directory of the project, 
 // './' is the current directory or relative path, not using a slash will look for core packages
 
 function rqListener(request, response){
+    const url = request.url;
+    const method = request.method;
+    const message = request.body;
+    if(url ==='/'){
+        response.write('<html>');
+        response.write('<head><title>Enter Message</title></head>');
+        response.write('<body><form action="/message" method="POST"><input type="text" name="message"><button type="submit">Send</button></input></form></body>');
+        response.write('</html>');
+        return response.end();
+    } 
+    if(url === '/message' && method === 'POST'){
+        fs.writeFileSync('message.txt', 'dummy data');
+        response.statusCode = 302;
+        response.setHeader('Location', '/');
+        return response.end();
+    }
+    else {
     // console.log(request.url, request.method, request.headers);
     // process.exit(); <- it unregisters from the event loop, basically shutting the server down
     response.setHeader('Content-Type', 'text/html');
     response.write('<html>');
     response.write('<head><title>My First Page</title></head>');
-    response.write('<body>Hello from my Node.js Server!</body>');
+    response.write('<body><h1>Hello from my Node.js Server!</h1></body>');
     response.write('</html>');
     response.end(); // Ends a response and sends it.
+    }
 }
 
 const server = http.createServer(rqListener);
