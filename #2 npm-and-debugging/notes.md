@@ -16,3 +16,10 @@ You can install a dev dependency by adding '--save-dev' for instance 'npm instal
 You can install a prod dependency by adding only '--save' for instance 'npm install nodemon --save'.
 Using '-g' would install this dependency globally.
 Just writing 'npm install' would install the newest version of dependencies defined in package.json.
+
+# Nodemon
+
+Nodemon is a package that listens to changes in the codebase and restarts the server when it detects such changes.
+It can be run by using 'nodemon' instead of 'node' when running your server i.e. 'nodemon app.js' 
+It will only work in the terminal if it is installed globally as terminal looks for global dependencies.
+To make it work locally, create a script in "package.json" and use the script. ("start": "nodemon app.js")
