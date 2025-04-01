@@ -1,0 +1,16 @@
+{
+  "name": "npm-and-debugging",
+  "version": "1.0.0",
+  "description": "Guide to npm and debugging",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "start-server": "node app.js"
+  },
+  "author": "Jakub Turowski",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
