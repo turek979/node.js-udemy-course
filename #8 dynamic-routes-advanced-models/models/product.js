@@ -52,7 +52,9 @@ module.exports = class Product {
       const productIndex = products.findIndex((prod) => prod.id === deletedId);
       products.splice(productIndex, 1);
       fs.writeFile(p, JSON.stringify(products), (err) => {
-        console.log(err);
+        if (!err) {
+          
+        }
       });
     });
   }
